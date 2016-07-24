@@ -1,0 +1,193 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>ColabPorn.com</title>
+		<style type="text/css">
+			body {
+				display:flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:center;
+				align-items:stretch;
+				
+				background-color:#323843;
+				color:#e7e8eb;
+				font-family:Helvetica, Arial, sans-serif;
+				font-size:16pt;
+				text-shadow:1px 1px 2px rgba(0, 0, 0, 0.82);
+				
+				position:fixed;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				
+				padding:0;
+				margin:0;
+			}
+			
+			section#splash {
+				position:relative;
+				flex-grow:2;
+			}
+			
+			footer {
+				font-size:0.75em;
+				height:auto;
+				text-align:right;
+			}
+			
+			section#splash, footer {
+				padding:20pt;
+			}
+			
+			h1 {
+				font-size:4.25em;
+				font-weight:normal;
+				
+				margin:0 0 0.25em;
+				
+				letter-spacing:-3px;
+			}
+			
+			h1 span {
+				color:#f090c0;
+				font-weight:bold;
+				font-size:1.125em;
+			}
+			
+			h2 {
+				font-size:1.75em;
+				font-style:italic;
+				height:1em;
+				margin:0;
+			}
+			
+			article {
+				display:flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:center;
+				align-items:stretch;
+				
+				position:absolute;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				
+				text-align:center;
+			}
+			
+			ol#word_roll {
+				position:relative;
+				top:8pt;
+				display:inline-block;
+				height:1em;
+				overflow:hidden;
+				
+				color:#ed145a;
+				border-bottom:1px dashed #e7e8eb;
+				
+				list-style:none;
+				padding:0 0 3pt 4px;
+				margin:0;
+			}
+			
+			ol#word_roll li {
+				opacity:0;
+				transition:opacity 250ms ease-out 0ms;
+			}
+			
+			ol#word_roll li:first-child {
+				opacity:1;
+			}
+			
+			p {
+				margin:8em 0 2.5em;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="splash">
+			<article>
+				<hgroup>
+					<h1>Collab<span>Porn</span></h1>
+					<h2>Let's get
+						<ol id="word_roll">
+							<li>weird</li>
+							<li>freaky</li>
+							<li>creative</li>
+							<li>frisky</li>
+							<li>it in</li>
+						</ol>
+					</h2>
+				</hgroup>
+				<p>Cumming soon &#x1f449;&#x1f44c;</p>
+			</article>
+		</section>
+		<footer>
+			&copy; 2016 CollabPorn.com
+		</footer>
+		
+		<script type="text/javascript">
+			
+			var INTERVAL = 3000;
+			
+			var _container = document.getElementById("word_roll");
+			var _list = _container.getElementsByTagName("li");
+			var _width = _container.offsetWidth;
+			var _height = _container.offsetHeight;
+			
+			var _index = 0;
+			var _last = null;
+			var _timer = null;
+			
+			function next(index, length) {
+				index += 1;
+				if (index === length)
+					return 0;
+				return index;
+			};
+			
+			function flip() {
+				if (_last)
+					_last.style.opacity = 0;
+				
+				var item = _list[_index];
+				item.style.opacity = 1;
+				
+				_last = item;
+				_index = next(_index, _list.length);
+			};
+			
+			function setup(container, items, w, h) {
+				w = w + 'px';
+				h = h + 'px';
+				
+				container.style.width = w;
+				container.style.height = h;
+				
+				Array.from(items).forEach(function(item) {
+					item.style.position = 'absolute';
+					item.style.top = 0;
+					item.style.left = '4px';
+					item.style.width = w;
+					item.style.height = h;
+				});
+			};
+			
+			function main() {
+				console.log("Getting started...");
+				console.log(_width, _height);
+				
+				setup(_container, _list, _width, _height);
+				
+				_timer = setInterval(flip, INTERVAL);
+			};
+			
+			main();
+		</script>
+	</body>
+</html>
